@@ -2,7 +2,7 @@
 
 ## Roadmap Javacript Full Stack enfocado en elementos Vue y React
 
-Aplicación de escritorio multiplataforma con roadmap interactivo de JavaScript/Vue desarrollada con tecnologias electron y Vue, ideal para nuevos desarrolladores que quieran ser full stack web usando Vue o React o ambos!!!!!
+Aplicación de escritorio multiplataforma para x64 ,Roadmap interactivo de JavaScript/Vue desarrollada con tecnologias electron y Vue, ideal para nuevos desarrolladores que quieran ser full stack web usando Vue o React o ambos!!!!!
 
 ## Características
 
