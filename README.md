@@ -53,8 +53,6 @@ npm run dev
 ## 4. Compila para producción:
 ```sh
 npm run build
-  
-  
    ```
 Gracia por leer :)
 
