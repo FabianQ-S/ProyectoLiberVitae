@@ -82,5 +82,4 @@ temp-electron-build/dist-electron/win-unpacked/
 temp-electron-build/dist-electron/builder-debug.yml
 temp-electron-build/dist-electron/builder-effective-config.yaml
 
-# Keep the executables folder
-!executables/
+
