@@ -1,0 +1,129 @@
+@import './base.css';
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Prevenir scroll horizontal en todo */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a2e;
+  color: #f8f8f2;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100vw;
+  min-width: 100vw;
+  padding: 0;
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  color: #f8f8f2;
+  min-height: 100vh;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Efecto de fondo con gradientes radiales */
+#app::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(189, 147, 249, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 121, 198, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(139, 233, 253, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glassmorphism utilities - Sin difuminado para mejor legibilidad */
+.glass-card {
+  background: rgba(68, 71, 90, 0.15);
+  border: 1px solid rgba(248, 248, 242, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+  border-color: rgba(139, 233, 253, 0.2);
+}
+
+/* Header con backdrop filter */
+.header-glass {
+  background: rgba(26, 26, 46, 0.8);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+/* Accent elements */
+.accent-element {
+  background: linear-gradient(135deg, #6272a4, #8be9fd);
+  border: 3px solid #bd93f9;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.accent-element:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 40px rgba(98, 114, 164, 0.8);
+  border-color: #ff79c6;
+  background: linear-gradient(135deg, #bd93f9, #ff79c6);
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+}
