@@ -2,6 +2,44 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const path = require('path')
 const isDev = process.env.NODE_ENV === 'development'
 
+// Configuración específica para resolver problemas de ICU en Windows
+if (process.platform === 'win32') {
+  // Asegurar que Electron encuentre los recursos ICU
+  process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
+  
+  // Múltiples rutas posibles para icudtl.dat
+  const possibleICUPaths = [
+    // Ruta cuando está empaquetado con extraFiles
+    path.join(process.resourcesPath, 'icudtl.dat'),
+    // Ruta alternativa en el directorio de la aplicación
+    path.join(path.dirname(process.execPath), 'icudtl.dat'),
+    // Ruta tradicional en app.asar.unpacked
+    path.join(process.resourcesPath, 'app.asar.unpacked', 'node_modules', 'electron', 'dist', 'icudtl.dat'),
+    // Ruta en desarrollo
+    path.join(__dirname, '..', 'node_modules', 'electron', 'dist', 'icudtl.dat')
+  ]
+  
+  // Buscar y configurar la ruta correcta de ICU
+  for (const icuPath of possibleICUPaths) {
+    if (require('fs').existsSync(icuPath)) {
+      process.env.ICU_DATA_FILE = icuPath
+      console.log('✅ ICU data found at:', icuPath)
+      break
+    }
+  }
+  
+  // Si no se encuentra, intentar con la ruta del ejecutable
+  if (!process.env.ICU_DATA_FILE) {
+    const execDirICU = path.join(path.dirname(process.execPath), 'icudtl.dat')
+    if (require('fs').existsSync(execDirICU)) {
+      process.env.ICU_DATA_FILE = execDirICU
+      console.log('✅ ICU data found in exec dir:', execDirICU)
+    } else {
+      console.warn('⚠️ ICU data file not found in any expected location')
+    }
+  }
+}
+
 // Forzar GTK 3 en Linux para compatibilidad con Fedora Budgie
 if (process.platform === 'linux') {
   process.env.GDK_BACKEND = 'x11'

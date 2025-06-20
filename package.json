@@ -2,6 +2,7 @@
   "name": "roadmapvite",
   "version": "1.0.0",
   "description": "Roadmap Interactivo de JavaScript & Vue.js - Guía paso a paso para desarrolladores frontend",
+  "author": "Fabián QS <fabian@example.com>",
   "main": "electron/main.js",
   "homepage": "./",
   "private": true,
@@ -14,7 +15,10 @@
     "electron": "electron .",
     "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "build-electron": "npm run build && electron-builder",
-    "dist": "npm run build && electron-builder --publish=never"
+    "dist": "npm run build && electron-builder --publish=never",
+    "dist-win": "npm run build && electron-builder --win --publish=never",
+    "clean": "rm -rf dist dist-electron",
+    "clean:all": "rm -rf dist dist-electron node_modules && npm install"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.10",
@@ -55,9 +59,21 @@
       "electron/**/*",
       "icon.ico",
       "icon.png",
+      "node_modules/better-sqlite3/**/*",
       "!node_modules/**/*",
       "!**/node_modules/@tailwindcss/oxide-wasm32-wasi/**/*",
       "!**/node_modules/@emnapi/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "node_modules/electron/dist/icudtl.dat",
+        "to": "icudtl.dat"
+      },
+      {
+        "from": "node_modules/electron/dist/",
+        "to": "electron-dist/",
+        "filter": ["*.pak", "*.dat", "*.bin"]
+      }
     ],
     "extraResources": [
       {
@@ -69,8 +85,27 @@
     "nodeGypRebuild": false,
     "npmRebuild": false,
     "win": {
-      "target": "nsis",
-      "icon": "icon.ico"
+      "target": {
+        "target": "nsis",
+        "arch": ["x64"]
+      },
+      "icon": "icon.ico",
+      "artifactName": "${productName}-${version}.${ext}",
+      "asarUnpack": [
+        "node_modules/better-sqlite3/**/*",
+        "node_modules/electron/dist/**/*"
+      ],
+      "extraFiles": [
+        {
+          "from": "node_modules/electron/dist/icudtl.dat",
+          "to": "icudtl.dat"
+        },
+        {
+          "from": "node_modules/electron/dist/",
+          "to": "locales/",
+          "filter": ["locales/**/*"]
+        }
+      ]
     },
     "linux": {
       "target": "AppImage",
@@ -81,7 +116,9 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico"
     }
   }
 }

@@ -28,15 +28,10 @@ out/
 # Testing
 coverage/
 .nyc_output
-/cypress/videos/
-/cypress/screenshots/
 
 # Cache directories
 .cache/
 .parcel-cache/
-.next/
-.nuxt/
-.vuepress/dist
 
 # OS generated files
 .DS_Store
@@ -63,23 +58,25 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
-.temporary/
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Project specific files
-CHANGELOG.md
 
 # Electron build artifacts
-temp-electron-build/node_modules/
-temp-electron-build/package-lock.json
-temp-electron-build/dist-electron/linux-unpacked/
-temp-electron-build/dist-electron/win-unpacked/
-temp-electron-build/dist-electron/builder-debug.yml
-temp-electron-build/dist-electron/builder-effective-config.yaml
+dist-electron/
+
+# Database files (runtime)
+*.db
+*.sqlite
+*.sqlite3
+roadmap-progress.db
+
+# Executable files - Users should build their own
+executables/*.exe
+executables/*.AppImage
+executables/*.deb
+executables/*.rpm
+executables/*.dmg
+!executables/README.md
+
+# Documentation (local only)
+GUIA-COMPILACION-ELECTRON.md
 
 
